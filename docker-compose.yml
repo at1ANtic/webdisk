@@ -1,0 +1,19 @@
+version: '3'
+services:
+    php-apache-environment:
+        container_name: php-apache
+        build:
+            context: ./src/php
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+        #volumes:
+        #    - ./src/php:/var/www/html/
+        ports:
+            - 8000:80
+    db:
+        container_name: db
+        build: ./src/db
+        restart: always
+        ports:
+            - "9906:3306"
